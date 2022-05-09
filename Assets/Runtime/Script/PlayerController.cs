@@ -6,18 +6,20 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float horizontalSpeed = 0.03f;
     [SerializeField] private float fowardSpeed = 0.5f;
+    [SerializeField] private float targetPositionX = 3f;
     private void Update()
     {
         Vector3 targetPosition = transform.position;
         if(Input.GetKey(KeyCode.A))
         {
-            targetPosition += Vector3.left * horizontalSpeed;
+            targetPositionX += Mathf.Lerp(transform.position.x, targetPositionX, Time.deltaTime * horizontalSpeed);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            targetPosition += Vector3.right * horizontalSpeed;
+            targetPositionX += Mathf.Lerp(transform.position.x, -targetPositionX, Time.deltaTime * horizontalSpeed);
+
         }
-        targetPosition += Vector3.forward * fowardSpeed;
+        targetPosition += Vector3.forward * fowardSpeed * Time.deltaTime;
 
         transform.position = targetPosition;
     }
