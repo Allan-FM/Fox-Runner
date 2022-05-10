@@ -4,23 +4,51 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float horizontalSpeed = 0.03f;
-    [SerializeField] private float fowardSpeed = 0.5f;
-    [SerializeField] private float targetPositionX = 3f;
+    [SerializeField] private float horizontalSpeed = 15;
+    [SerializeField] private float fowardSpeed = 10;
+    [SerializeField] private float laneDistanceX = 4;
+
+    private Vector3 initialPositon;
+    private float targetPositionX;
+
+    private float LeftLaneX => initialPositon.x - laneDistanceX;
+    private float RigthLaneX => initialPositon.x + laneDistanceX;
+
+    private void Awake()
+    {
+        initialPositon = transform.position;
+    }
     private void Update()
     {
-        Vector3 targetPosition = transform.position;
-        if(Input.GetKey(KeyCode.A))
-        {
-            targetPositionX += Mathf.Lerp(transform.position.x, targetPositionX, Time.deltaTime * horizontalSpeed);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            targetPositionX += Mathf.Lerp(transform.position.x, -targetPositionX, Time.deltaTime * horizontalSpeed);
+        ProcessInput();
 
-        }
-        targetPosition += Vector3.forward * fowardSpeed * Time.deltaTime;
+        Vector3 position = transform.position;
 
-        transform.position = targetPosition;
+        position.x = ProcessLaneMovement();
+        position.z = ProcessFowardMovement();
+
+        transform.position = position;
+    }
+
+    private void ProcessInput()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            targetPositionX += laneDistanceX;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            targetPositionX -= laneDistanceX;
+        }
+
+        targetPositionX = Mathf.Clamp(targetPositionX, LeftLaneX, RigthLaneX);
+    }
+    private float ProcessLaneMovement()
+    {
+        return Mathf.Lerp(transform.position.x, targetPositionX, Time.deltaTime * horizontalSpeed);
+    }
+    private float ProcessFowardMovement()
+    {
+        return transform.position.z + fowardSpeed * Time.deltaTime;
     }
 }

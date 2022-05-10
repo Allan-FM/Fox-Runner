@@ -307,7 +307,7 @@ Transform:
   m_GameObject: {fileID: 821370828}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.58, z: 113.25}
-  m_LocalScale: {x: 3.7393446, y: 0.046303764, z: 235.00171}
+  m_LocalScale: {x: 6.302665, y: 0.046303764, z: 235.00171}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalSpeed: 5
   fowardSpeed: 10
-  targetPositionX: 3
+  laneDistanceX: 1.5
 --- !u!65 &1566114029
 BoxCollider:
   m_ObjectHideFlags: 0
