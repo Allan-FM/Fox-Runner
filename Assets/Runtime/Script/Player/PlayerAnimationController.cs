@@ -15,4 +15,8 @@ public class PlayerAnimationController : MonoBehaviour
     {
         animator.SetBool(TagManager.IsJumping, playerController.IsJumping);
     }
+    public void Die()
+    {
+        animator.SetTrigger(TagManager.DieTrigger);
+    }
 }

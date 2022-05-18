@@ -7,4 +7,5 @@ public static class TagManager
     public const string IsJumping = "IsJumping";
     public const string JumpMultiplier = "JumpMultiplier";
     public const string StartGameTrigger = "StartGameTrigger";
+    public const string DieTrigger = "Die";
 }
