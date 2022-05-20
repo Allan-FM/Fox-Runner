@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    [SerializeField] private GameMode gameMode;
     private PlayerController playerController;
     private PlayerAnimationController playerAnimationController;
     private void Awake()
@@ -18,6 +19,7 @@ public class PlayerCollision : MonoBehaviour
         {
             playerController.Die();
             playerAnimationController.Die();
+            gameMode.OnGameOver();
         }
     }
 }

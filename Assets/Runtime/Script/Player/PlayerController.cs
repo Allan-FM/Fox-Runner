@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float jumpDisatanceZ = 5;
     [SerializeField] private float jumpHeigth = 2;
+    [SerializeField] private float jumpLerpSpeed = 10f;
 
     [Header("Roll")]
     [SerializeField] private float rollDistaceZ = 5f;
@@ -32,8 +33,8 @@ public class PlayerController : MonoBehaviour
     private float LeftLaneX => initialPositon.x - laneDistanceX;
     private float RigthLaneX => initialPositon.x + laneDistanceX;
 
-    private bool canJump => !IsJumping && !IsRolling;
-    private bool canRoll => !IsRolling && !IsJumping;
+    private bool canJump => !IsJumping;
+    private bool canRoll => !IsRolling;
 
     private void Awake()
     {
@@ -66,8 +67,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W) && canJump)
         {
-            IsJumping = true;
-            jumpStartZ = transform.position.z;
+            StarJump();
         }
         if (Input.GetKeyDown(KeyCode.S) && canRoll)
         {
@@ -85,6 +85,16 @@ public class PlayerController : MonoBehaviour
     {
         return transform.position.z + fowardSpeed * Time.deltaTime;
     }
+    private void StarJump()
+    {
+        IsJumping = true;
+        jumpStartZ = transform.position.z;
+        StopRoll();
+    }
+    private void StopJump()
+    {
+        IsJumping = false;
+    }
     private float ProcessJump()
     {
         float deltaY = 0;
@@ -95,7 +105,7 @@ public class PlayerController : MonoBehaviour
             float jumpPercent = jumpCurrentProgress / jumpDisatanceZ;
             if (jumpPercent >= 1)
             {
-                IsJumping = false;
+                StopJump();
             }
             else
             {
@@ -103,7 +113,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-        return initialPositon.y + deltaY;
+        float targetPositionY = initialPositon.y + deltaY;
+        return Mathf.Lerp(transform.position.y, targetPositionY, Time.deltaTime * jumpLerpSpeed);
     }
     private void ProcessRoll()
     {
@@ -122,6 +133,8 @@ public class PlayerController : MonoBehaviour
         IsRolling = true;
         regularCollider.enabled = false;
         rollCollider.enabled = true;
+
+        StopJump();
     }
     private void StopRoll()
     {
@@ -132,6 +145,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Die()
     {
-        enabled = false;
+        fowardSpeed = 0;
+        StopRoll();
+        StopJump();
     }
 }
