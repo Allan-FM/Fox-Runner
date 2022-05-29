@@ -358,14 +358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentsPrefabs:
-  - {fileID: 1696176218809326670, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
   - {fileID: 6576099392186855970, guid: c7a017a5d2cad284bb2a5356291b7a4b, type: 3}
-  - {fileID: 6576099392186855970, guid: f1bdc2e7c2c6dbe48b0aff9680552262, type: 3}
-  - {fileID: 6576099392186855970, guid: a8243710d47531c4b9e9470c657942b7, type: 3}
-  - {fileID: 6576099392186855970, guid: 5f5674db2a3cdfa4da2173fb382c8356, type: 3}
-  - {fileID: 6576099392186855970, guid: 3a7053f94ecacb741ba3e5e09c5b46cd, type: 3}
-  - {fileID: 6576099392186855970, guid: 6b3292b096e596d4392dc3eb58f9d613, type: 3}
   - {fileID: 6576099392186855970, guid: 1e9ab8860a735034b8873b1e442ff3b9, type: 3}
+  firstTrackPrefab: {fileID: 1696176218809326670, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
+  initialTrackCount: 10
 --- !u!1001 &1860105721
 PrefabInstance:
   m_ObjectHideFlags: 0
