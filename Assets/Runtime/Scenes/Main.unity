@@ -294,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.117537275, y: -0.0010006403, z: 0.00015262843, w: 0.993068}
-  m_LocalPosition: {x: -0, y: 3.7, z: -6}
+  m_LocalPosition: {x: -0, y: 3.7, z: -6.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1860105726}
-  armZ: -6
+  armZ: -6.1
 --- !u!1 &1809500490
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,11 +357,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975af478cc5c030478c8bbc50b511ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1860105726}
   segmentsPrefabs:
   - {fileID: 6576099392186855970, guid: c7a017a5d2cad284bb2a5356291b7a4b, type: 3}
   - {fileID: 6576099392186855970, guid: 1e9ab8860a735034b8873b1e442ff3b9, type: 3}
   firstTrackPrefab: {fileID: 1696176218809326670, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
-  initialTrackCount: 10
+  initialTrackCount: 5
+  minTrackInFrontOfPlayer: 3
 --- !u!1001 &1860105721
 PrefabInstance:
   m_ObjectHideFlags: 0

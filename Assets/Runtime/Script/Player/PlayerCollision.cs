@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(PlayerAnimationController))]
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private GameMode gameMode;

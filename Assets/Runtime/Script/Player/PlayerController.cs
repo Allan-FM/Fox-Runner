@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         if (IsRolling)
         {
             float percent = (transform.position.z - rollStartZ) / rollDistaceZ;
-            if(percent > 1)
+            if(percent >= 1)
             {
                 StopRoll();
             }
