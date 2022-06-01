@@ -9,14 +9,29 @@ public class EndlessTrackGenerator : MonoBehaviour
     [SerializeField] private TrackSegment[] segmentsPrefabs;
     [SerializeField] private TrackSegment  firstTrackPrefab;
 
+    [SerializeField] private TrackSegment[] easyTrackPrefabs;
+    [SerializeField] private TrackSegment[] hardTrackPrefabs;
+    [SerializeField] private TrackSegment[] rewardTrackPrefab;
+
     [Header("Endless Generation Parameters")]
     [Space]
     [SerializeField] private int initialTrackCount = 10;
     [SerializeField] private int minTrackInFrontOfPlayer = 3;
 
+    [Header("Level Difficulty Parameters")]
+    [Range(0, 1)]
+    [SerializeField] private float hardTrackChance = 0.2f;
+
+    [SerializeField] private int minTrackBeforeReward = 10;
+    [SerializeField] private int maxTrackBeforeReward = 20;
+    [SerializeField]  private int minRewardTrackCount;
+    [SerializeField] private int maxRewardTrackCount;
+
     private List<TrackSegment> currentSegments = new List<TrackSegment>();
     [SerializeField] private float minDistanceToConsiderInsadeTrack = 3;
-
+    private bool isSpawningRewardTrack = false;
+    private int rewardTrackLeftToSpawn = 0;
+    private int trackSpawnedAfterLastReward = 0;
     private void Start()
     {
         SpawnTrackSegment(firstTrackPrefab, null);
@@ -25,23 +40,38 @@ public class EndlessTrackGenerator : MonoBehaviour
     
     private void Update()
     {
+        UpdateTracks();
+    }
+
+    private void UpdateTracks()
+    {
         int playerTrackIndex = FindTrackIndexWithPlayer();
         if (playerTrackIndex < 0)
         {
             return;
         }
 
-        int tracksInFrontOfPlayer = currentSegments.Count - (playerTrackIndex + 1);
-        if (tracksInFrontOfPlayer < minTrackInFrontOfPlayer)
-        {
-            SpawnTracks(minTrackInFrontOfPlayer - tracksInFrontOfPlayer);
-        }
+        SpawnNewTrackIfNeeded(playerTrackIndex);
+        DespawnTrackBehindPlayer(playerTrackIndex);
+    }
+
+    private void DespawnTrackBehindPlayer(int playerTrackIndex)
+    {
         for (int i = 0; i < playerTrackIndex; i++)
         {
             TrackSegment track = currentSegments[i];
             Destroy(track.gameObject);
         }
         currentSegments.RemoveRange(0, playerTrackIndex);
+    }
+
+    private void SpawnNewTrackIfNeeded(int playerTrackIndex)
+    {
+        int tracksInFrontOfPlayer = currentSegments.Count - (playerTrackIndex + 1);
+        if (tracksInFrontOfPlayer < minTrackInFrontOfPlayer)
+        {
+            SpawnTracks(minTrackInFrontOfPlayer - tracksInFrontOfPlayer);
+        }
     }
 
     private int FindTrackIndexWithPlayer()
@@ -67,10 +97,23 @@ public class EndlessTrackGenerator : MonoBehaviour
             ? currentSegments[currentSegments.Count - 1] : null;
         for (int i = 0; i < trackCount; i++)
         {
-            int index = Random.Range(0, segmentsPrefabs.Length);
-            TrackSegment track = segmentsPrefabs[index];
+            var track = GetRandomTrack();
             previousTrack = SpawnTrackSegment(track, previousTrack);
         }
+    }
+    private TrackSegment GetRandomTrack()
+    {
+        TrackSegment[] trackList = null;
+        if(isSpawningRewardTrack)
+        {
+            trackList = rewardTrackPrefab;
+        }
+        else
+        {
+            trackList = Random.value <= hardTrackChance ? hardTrackPrefabs : easyTrackPrefabs;
+        }
+        return trackList[Random.Range(0, trackList.Length)];
+
     }
     private TrackSegment SpawnTrackSegment(TrackSegment track, TrackSegment previousTrack)
     {
@@ -93,6 +136,29 @@ public class EndlessTrackGenerator : MonoBehaviour
         }
 
         currentSegments.Add(trackIntance);
+        UpdateRewardTracking();
         return trackIntance;
+    }
+    private void UpdateRewardTracking()
+    {
+        if(isSpawningRewardTrack)
+        {
+            rewardTrackLeftToSpawn--;
+            if(rewardTrackLeftToSpawn <= 0)
+            {
+                isSpawningRewardTrack = false;
+                trackSpawnedAfterLastReward = 0;
+            }
+        }
+        else
+        {
+            trackSpawnedAfterLastReward++;
+            int requiredTrackBeforeReward = Random.Range(minTrackBeforeReward, maxTrackBeforeReward + 1);
+            if(trackSpawnedAfterLastReward >= requiredTrackBeforeReward)
+            {
+                isSpawningRewardTrack = true;
+                rewardTrackLeftToSpawn = Random.Range(minRewardTrackCount, maxRewardTrackCount + 1);
+            }
+        }
     }
 }

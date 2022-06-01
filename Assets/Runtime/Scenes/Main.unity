@@ -362,8 +362,19 @@ MonoBehaviour:
   - {fileID: 6576099392186855970, guid: c7a017a5d2cad284bb2a5356291b7a4b, type: 3}
   - {fileID: 6576099392186855970, guid: 1e9ab8860a735034b8873b1e442ff3b9, type: 3}
   firstTrackPrefab: {fileID: 1696176218809326670, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
+  easyTrackPrefabs:
+  - {fileID: 6576099392186855970, guid: c7a017a5d2cad284bb2a5356291b7a4b, type: 3}
+  hardTrackPrefabs:
+  - {fileID: 6576099392186855970, guid: 1e9ab8860a735034b8873b1e442ff3b9, type: 3}
+  rewardTrackPrefab: []
   initialTrackCount: 5
   minTrackInFrontOfPlayer: 3
+  hardTrackChance: 0.2
+  minTrackBeforeReward: 10
+  maxTrackBeforeReward: 20
+  minRewardTrackCount: 1
+  maxRewardTrackCount: 2
+  minDistanceToConsiderInsadeTrack: 3
 --- !u!1001 &1860105721
 PrefabInstance:
   m_ObjectHideFlags: 0
