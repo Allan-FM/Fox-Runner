@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider rollCollider;
 
 
-    Vector3 initialPosition;
+    private Vector3 initialPosition;
 
     float targetPositionX;
 
