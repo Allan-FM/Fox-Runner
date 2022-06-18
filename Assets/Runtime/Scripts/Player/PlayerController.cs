@@ -42,7 +42,11 @@ public class PlayerController : MonoBehaviour
     private bool CanJump => !IsJumping;
     private bool CanRoll => !IsRolling;
 
-    public float TravelledDistance => Vector3.Distance(transform.position, initialPosition);
+    //TODO: Move to GameMode
+    [SerializeField] private float baseScoreMultiplier = 1f;
+    private float score;
+    public int Score => Mathf.RoundToInt(score);
+    //
 
     void Awake()
     {
@@ -62,6 +66,8 @@ public class PlayerController : MonoBehaviour
         ProcessRoll();
 
         transform.position = position;
+        //TODO: Move To GameMode
+        score += baseScoreMultiplier * forwardSpeed * Time.deltaTime;
     }
 
     private void ProcessInput()
