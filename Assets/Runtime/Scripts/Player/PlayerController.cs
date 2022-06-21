@@ -34,11 +34,10 @@ public class PlayerController : MonoBehaviour
     public float JumpDuration => jumpDistanceZ / forwardSpeed;
 
     public float RollDuration => rollDistanceZ / forwardSpeed;
-    float jumpStartZ;
 
+    float jumpStartZ;
     private float LeftLaneX => initialPosition.x - laneDistanceX;
     private float RightLaneX => initialPosition.x + laneDistanceX;
-
     private bool CanJump => !IsJumping;
     private bool CanRoll => !IsRolling;
 
@@ -46,6 +45,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float baseScoreMultiplier = 1f;
     private float score;
     public int Score => Mathf.RoundToInt(score);
+    public float TravelleDistance => transform.position.z - initialPosition.z;
     //
 
     void Awake()
