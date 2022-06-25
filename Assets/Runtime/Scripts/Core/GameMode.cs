@@ -43,9 +43,10 @@ public class GameMode : MonoBehaviour
     {
         Time.timeScale = 1;
     }
-        private IEnumerator ReloadGameCoroutine()
+    private IEnumerator ReloadGameCoroutine()
     {
-        //esperar uma frame
+        yield return new WaitForSeconds(1);
+        musicPlayer.PlayGameOverMusic();
         yield return new WaitForSeconds(reloadGameDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

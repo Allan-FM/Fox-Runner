@@ -5,6 +5,7 @@ public class MusicPlayer : MonoBehaviour
 {
     [SerializeField] private AudioClip startMenuMusic;
     [SerializeField] private AudioClip mainTrackMusic;
+    [SerializeField] private AudioClip gameOverMusic;
     private AudioSource audioSource;
 
     private AudioSource AudioSource => audioSource == null ? 
@@ -17,6 +18,10 @@ public class MusicPlayer : MonoBehaviour
     public void PlayMainTrackMusic()
     {
         PlayMusic(mainTrackMusic);
+    }
+    public void PlayGameOverMusic()
+    {
+        PlayMusic(gameOverMusic);
     }
     private void PlayMusic(AudioClip clip)
     {
