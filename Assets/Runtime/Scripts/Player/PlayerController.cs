@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -23,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Collider rollCollider;
 
 
-    private Vector3 initialPosition;
+    Vector3 initialPosition;
 
     float targetPositionX;
 
@@ -35,18 +33,20 @@ public class PlayerController : MonoBehaviour
     public float JumpDuration => jumpDistanceZ / forwardSpeed;
 
     public float RollDuration => rollDistanceZ / forwardSpeed;
-
     float jumpStartZ;
+
     private float LeftLaneX => initialPosition.x - laneDistanceX;
     private float RightLaneX => initialPosition.x + laneDistanceX;
+
     private bool CanJump => !IsJumping;
     private bool CanRoll => !IsRolling;
 
     //TODO: Move to GameMode
-    [SerializeField] private float baseScoreMultiplier = 1f;
+    [SerializeField] private float baseScoreMultiplier = 1;
     private float score;
     public int Score => Mathf.RoundToInt(score);
-    public float TravelleDistance => transform.position.z - initialPosition.z;
+
+    public float TravelledDistance => transform.position.z - initialPosition.z;
     //
 
     void Awake()
@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour
         ProcessRoll();
 
         transform.position = position;
-        //TODO: Move To GameMode
+
+        //TODO: Move to game mode
         score += baseScoreMultiplier * forwardSpeed * Time.deltaTime;
     }
 
@@ -154,7 +155,7 @@ public class PlayerController : MonoBehaviour
         IsRolling = true;
         regularCollider.enabled = false;
         rollCollider.enabled = true;
-        
+
         StopJump();
 
         audioController.PlayRollSound();

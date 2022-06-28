@@ -7,7 +7,7 @@ public class TrackSegment : MonoBehaviour
     [SerializeField] private Transform end;
 
     [SerializeField] private ObstacleSpawner[] obstacleSpawners;
-    [SerializeField] private DecorationSpawner decorationSpawner;
+    [SerializeField] DecorationSpawner decorationSpawner;
 
     public Transform Start => start;
     public Transform End => end;
