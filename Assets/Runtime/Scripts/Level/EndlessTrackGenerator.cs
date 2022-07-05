@@ -117,12 +117,9 @@ public class EndlessTrackGenerator : MonoBehaviour
             trackInstance.transform.position = Vector3.zero;
         }
 
-        foreach (var obstacleSpawner in trackInstance.ObstacleSpawners)
-        {
-            obstacleSpawner.SpawnObstacle();
-        }
-
-        trackInstance.DecorationSpawner.SpawnDecorations();
+        trackInstance.SpawnObstacles();
+        trackInstance.SpawnDecorations();
+        trackInstance.SpawnPickups();
 
         currentSegments.Add(trackInstance);
 

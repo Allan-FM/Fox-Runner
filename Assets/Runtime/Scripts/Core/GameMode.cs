@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameMode : MonoBehaviour
 {
@@ -16,27 +13,34 @@ public class GameMode : MonoBehaviour
 
     [SerializeField] private MusicPlayer musicPlayer;
 
-
     [Header("Gameplay")]
     [SerializeField] private float startPlayerSpeed = 10;
     [SerializeField] private float maxPlayerSpeed = 20;
     [SerializeField] private float timeToMaxSpeedSeconds = 5 * 60;
+
     [SerializeField] private float reloadGameDelay = 3;
 
     [SerializeField]
     [Range(0, 5)]
     private int startGameCountdown = 5;
+
     [Header("Score")]
     [SerializeField] private float baseScoreMultiplier = 1;
+
     private float score;
     public int Score => Mathf.RoundToInt(score);
+
+    public int CherriesPicked { get; private set; }
+
     private float startGameTime;
-    private bool isGameRunning = true;
+
+    private bool isGameRunning = false;
 
     private void Awake()
     {
         SetWaitForStartGameState();
     }
+
     private void Update()
     {
         if (isGameRunning)
@@ -46,8 +50,8 @@ public class GameMode : MonoBehaviour
             float extraScoreMultiplier = 1 + timePercent;
             score += baseScoreMultiplier * extraScoreMultiplier * player.ForwardSpeed * Time.deltaTime;
         }
-
     }
+
     private void SetWaitForStartGameState()
     {
         player.enabled = false;
@@ -61,14 +65,6 @@ public class GameMode : MonoBehaviour
         isGameRunning = false;
         player.ForwardSpeed = 0;
         StartCoroutine(ReloadGameCoroutine());
-    }
-
-    private IEnumerator ReloadGameCoroutine()
-    {
-        yield return new WaitForSeconds(1);
-        musicPlayer.PlayGameOverMusic();
-        yield return new WaitForSeconds(reloadGameDelay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void StartGame()
@@ -86,6 +82,11 @@ public class GameMode : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void OnCherryPickedUp()
+    {
+        CherriesPicked++;
+    }
+
     private IEnumerator StartGameCor()
     {
         musicPlayer.PlayMainTrackMusic();
@@ -96,5 +97,13 @@ public class GameMode : MonoBehaviour
         player.ForwardSpeed = startPlayerSpeed;
         startGameTime = Time.time;
         isGameRunning = true;
+    }
+
+    private IEnumerator ReloadGameCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        musicPlayer.PlayGameOverMusic();
+        yield return new WaitForSeconds(reloadGameDelay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

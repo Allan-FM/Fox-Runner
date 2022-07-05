@@ -47,8 +47,13 @@ MonoBehaviour:
   player: {fileID: 0}
   playerAnimationController: {fileID: 0}
   mainHud: {fileID: 0}
+  musicPlayer: {fileID: 0}
+  startPlayerSpeed: 10
+  maxPlayerSpeed: 17
+  timeToMaxSpeedSeconds: 300
   reloadGameDelay: 3
   startGameCountdown: 3
+  baseScoreMultiplier: 1
 --- !u!114 &3490472212628903674
 MonoBehaviour:
   m_ObjectHideFlags: 0

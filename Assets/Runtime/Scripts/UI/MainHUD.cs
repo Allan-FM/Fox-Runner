@@ -18,6 +18,8 @@ public class MainHUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI distanceText;
     [SerializeField] private TextMeshProUGUI countdownText;
 
+    [SerializeField] private TextMeshProUGUI cherryCountText;
+
     private MainHUDAudioController audioController;
 
     private void Awake()
@@ -30,6 +32,7 @@ public class MainHUD : MonoBehaviour
     {
         scoreText.text = $"Score : {gameMode.Score}";
         distanceText.text = $"{Mathf.RoundToInt(player.TravelledDistance)}m";
+        cherryCountText.text = $"{gameMode.CherriesPicked}";
     }
 
     public void StartGame()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3409168627377953448}
   - component: {fileID: 6681915805340960521}
+  - component: {fileID: 2094758687145134973}
   m_Layer: 0
   m_Name: PPV_Global_Main
   m_TagString: Untagged
@@ -44,3 +45,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2094758687145134973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434786844771738552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: e56e0d59f380f9c49908681d6b313c46, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0

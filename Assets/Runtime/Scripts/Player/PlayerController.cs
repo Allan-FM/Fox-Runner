@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     Vector3 initialPosition;
 
     float targetPositionX;
+
     public float ForwardSpeed { get; set; } = 10;
 
     public bool IsJumping { get; private set; }
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private bool CanRoll => !IsRolling;
 
     public float TravelledDistance => transform.position.z - initialPosition.z;
+
     private bool isDead = false;
 
     void Awake()
@@ -52,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(!isDead)
+        if (!isDead)
         {
             ProcessInput();
         }
@@ -166,7 +168,8 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         ForwardSpeed = 0;
-
+        horizontalSpeed = 0;
+        targetPositionX = transform.position.x;
         isDead = true;
         StopRoll();
         StopJump();

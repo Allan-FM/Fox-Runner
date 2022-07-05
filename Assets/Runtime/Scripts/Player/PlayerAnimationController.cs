@@ -26,7 +26,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public IEnumerator PlayStartGameAnimation()
     {
- animator.SetTrigger(PlayerAnimationConstants.StartGameTrigger);
+        animator.SetTrigger(PlayerAnimationConstants.StartGameTrigger);
 
         while (!animator.GetCurrentAnimatorStateInfo(0).IsName(PlayerAnimationConstants.StartGameAnimationStateName))
         {
