@@ -42,8 +42,9 @@ public class TrackSegment : MonoBehaviour
             Vector3[] skipPositions = new Vector3[obstacleSpawners.Length];
             for (int i = 0; i < skipPositions.Length; i++)
             {
-                skipPositions[i] = obstacleSpawners[i].transform.position;
+                skipPositions[i] = ObstacleSpawners[i].transform.position;
             }
+
             int randomIndex = Random.Range(0, pickupLineSpawners.Length);
             PickupLineSpawner pickupSpawner = pickupLineSpawners[randomIndex];
             pickupSpawner.SpawnPickupLine(skipPositions);

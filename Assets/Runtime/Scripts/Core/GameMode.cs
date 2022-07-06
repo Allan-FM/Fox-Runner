@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMode : MonoBehaviour
 {
+    [SerializeField] private GameSaver gameSaver;
+
     [Header("Player")]
     [SerializeField] PlayerController player;
     [SerializeField] PlayerAnimationController playerAnimationController;
@@ -28,6 +30,8 @@ public class GameMode : MonoBehaviour
     [SerializeField] private float baseScoreMultiplier = 1;
 
     private float score;
+
+    public SaveGameData CurrentSave => gameSaver.CurrentSave;
     public int Score => Mathf.RoundToInt(score);
 
     public int CherriesPicked { get; private set; }
@@ -38,6 +42,7 @@ public class GameMode : MonoBehaviour
 
     private void Awake()
     {
+        gameSaver.LoadGame();
         SetWaitForStartGameState();
     }
 
@@ -64,6 +69,14 @@ public class GameMode : MonoBehaviour
     {
         isGameRunning = false;
         player.ForwardSpeed = 0;
+
+        gameSaver.SaveGame(new SaveGameData
+        {
+            HighestScore = Score > gameSaver.CurrentSave.HighestScore ? Score : gameSaver.CurrentSave.HighestScore,
+            LastScore = Score,
+            TotalCherriesCollected = gameSaver.CurrentSave.TotalCherriesCollected + CherriesPicked
+        });
+
         StartCoroutine(ReloadGameCoroutine());
     }
 

@@ -20,6 +20,7 @@ public class PickupLineSpawner : MonoBehaviour
             currentSpawnPosition.z += spaceBetweenPickups;
         }
     }
+
     private bool ShouldSkipPosition(Vector3 currentSpawnPosition, Vector3[] skipPositions)
     {
         foreach (var skipPosition in skipPositions)
@@ -27,7 +28,7 @@ public class PickupLineSpawner : MonoBehaviour
             float skipStart = skipPosition.z - spaceBetweenPickups * 0.5f;
             float skipEnd = skipPosition.z + spaceBetweenPickups * 0.5f;
 
-            if(currentSpawnPosition.z >= skipStart && currentSpawnPosition.z <= skipEnd)
+            if (currentSpawnPosition.z >= skipStart && currentSpawnPosition.z <= skipEnd)
             {
                 return true;
             }

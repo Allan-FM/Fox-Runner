@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5473261710550771339}
   - component: {fileID: 5473261710550771336}
   - component: {fileID: 3490472212628903674}
+  - component: {fileID: 8929086331296440630}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c86df3b9291c274ca4647c769962708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSaver: {fileID: 8929086331296440630}
   player: {fileID: 0}
   playerAnimationController: {fileID: 0}
   mainHud: {fileID: 0}
@@ -67,3 +69,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curveStrength: 0.005
+--- !u!114 &8929086331296440630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473261710550771337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1383a3ecbb7a61d4a9108b934da3745b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
