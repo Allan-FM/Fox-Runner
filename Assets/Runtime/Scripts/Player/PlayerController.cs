@@ -168,7 +168,6 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         ForwardSpeed = 0;
-        horizontalSpeed = 0;
         targetPositionX = transform.position.x;
         isDead = true;
         StopRoll();

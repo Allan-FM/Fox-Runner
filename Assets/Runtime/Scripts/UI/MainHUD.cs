@@ -12,6 +12,7 @@ public class MainHUD : MonoBehaviour
     [SerializeField] private GameObject startGameOverlay;
     [SerializeField] private GameObject hudOverlay;
     [SerializeField] private GameObject pauseOverlay;
+    [SerializeField] private GameObject settingsOverlay;
 
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -57,6 +58,7 @@ public class MainHUD : MonoBehaviour
         startGameOverlay.SetActive(true);
         pauseOverlay.SetActive(false);
         hudOverlay.SetActive(false);
+        settingsOverlay.SetActive(false);
     }
 
     public void ShowHudOverlay()
@@ -64,6 +66,7 @@ public class MainHUD : MonoBehaviour
         startGameOverlay.SetActive(false);
         pauseOverlay.SetActive(false);
         hudOverlay.SetActive(true);
+        settingsOverlay.SetActive(false);
     }
 
     public void ShowPauseOverlay()
@@ -71,6 +74,15 @@ public class MainHUD : MonoBehaviour
         startGameOverlay.SetActive(false);
         pauseOverlay.SetActive(true);
         hudOverlay.SetActive(false);
+        settingsOverlay.SetActive(false);
+    }
+
+    public void ShowSettingsOverlay()
+    {
+        startGameOverlay.SetActive(false);
+        pauseOverlay.SetActive(false);
+        hudOverlay.SetActive(false);
+        settingsOverlay.SetActive(true);
     }
 
     public IEnumerator PlayStartGameCountdown(int countdownSeconds)

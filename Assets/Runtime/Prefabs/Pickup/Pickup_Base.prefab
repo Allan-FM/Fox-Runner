@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44be7348bb6c57a439e942417dcd0688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 100
   pickupAudio: {fileID: 8300000, guid: 0e1d959a44eb0934e94bcd45cb6a22ac, type: 3}
   model: {fileID: 0}
 --- !u!65 &5754689434153635309
@@ -70,7 +69,7 @@ AudioSource:
   m_GameObject: {fileID: 8213782396315760644}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8605089138821175006, guid: c07e61c505e4dfe4b96c2d76721cda45, type: 2}
+  OutputAudioMixerGroup: {fileID: -1450324270061248655, guid: c07e61c505e4dfe4b96c2d76721cda45, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

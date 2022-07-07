@@ -5,17 +5,17 @@ public class Obstacle : MonoBehaviour
 {
     [SerializeField] private DecorationSpawner[] decorationSpawners;
 
-    private List<ObstacleDecoration> obstacleDecorations = new List<ObstacleDecoration>();
+    private List<ObstacleDecoration> decorations = new List<ObstacleDecoration>();
 
     public void SpawnDecorations()
     {
         foreach (var decorationSpawner in decorationSpawners)
         {
             decorationSpawner.SpawnDecorations();
-            ObstacleDecoration obstacleDecoration = decorationSpawner.CurrentDecoration.GetComponent<ObstacleDecoration>();
+            var obstacleDecoration = decorationSpawner.CurrentDecoration.GetComponent<ObstacleDecoration>();
             if (obstacleDecoration != null)
             {
-                obstacleDecorations.Add(obstacleDecoration);
+                decorations.Add(obstacleDecoration);
             }
         }
     }
@@ -31,18 +31,21 @@ public class Obstacle : MonoBehaviour
 
     private ObstacleDecoration FindDecorationForCollider(Collider collider)
     {
+        //TODO: Como os colliders estão todos no root transform, nós precisamos procurar
+        //qual decoration recebeu a colisão baseado na distância do collider
+        //Pensar em uma solução melhor para isso
         float minDistX = Mathf.Infinity;
         ObstacleDecoration minDistDecoration = null;
-
-        foreach (ObstacleDecoration decoration in obstacleDecorations)
+        foreach (var decoration in decorations)
         {
-            float decorationPosX = decoration.transform.position.x;
-            float colliderPosX = collider.bounds.center.x;
-            float distX = Mathf.Abs(decorationPosX - colliderPosX);
-            if (distX < minDistX)
+            float decorationXDistToCollider =
+            Mathf.Abs(
+                collider.bounds.center.x -
+                decoration.transform.position.x);
+            if (decorationXDistToCollider < minDistX)
             {
-                minDistX = distX;
                 minDistDecoration = decoration;
+                minDistX = decorationXDistToCollider;
             }
         }
         return minDistDecoration;

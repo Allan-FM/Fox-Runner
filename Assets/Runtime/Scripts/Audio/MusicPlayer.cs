@@ -31,7 +31,9 @@ public class MusicPlayer : MonoBehaviour
 
     private void PlayMusic(AudioClip clip)
     {
-        AudioUtility.PlayMusic(AudioSource, clip);
+        AudioSource.clip = clip;
+        AudioSource.loop = true;
+        AudioSource.Play();
     }
 
     public void StopMusic()

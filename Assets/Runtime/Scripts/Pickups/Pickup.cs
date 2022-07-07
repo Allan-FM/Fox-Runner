@@ -12,7 +12,6 @@ public class Pickup : MonoBehaviour
         AudioSource audioSource = GetComponent<AudioSource>();
         AudioUtility.PlayAudioCue(audioSource, pickupAudio);
 
-        //TODO: Mover toque de áudio para um AudioService
         model.SetActive(false);
         Destroy(gameObject, pickupAudio.length);
     }

@@ -2,6 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class GameMode : MonoBehaviour
 {
     [SerializeField] private GameSaver gameSaver;
@@ -32,6 +36,8 @@ public class GameMode : MonoBehaviour
     private float score;
 
     public SaveGameData CurrentSave => gameSaver.CurrentSave;
+    public AudioPreferences AudioPreferences => gameSaver.AudioPreferences;
+
     public int Score => Mathf.RoundToInt(score);
 
     public int CherriesPicked { get; private set; }
@@ -98,6 +104,15 @@ public class GameMode : MonoBehaviour
     public void OnCherryPickedUp()
     {
         CherriesPicked++;
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 
     private IEnumerator StartGameCor()
